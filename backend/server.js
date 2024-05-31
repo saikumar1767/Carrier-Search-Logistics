@@ -7,12 +7,13 @@ import { createObjectCsvWriter } from "csv-writer";
 
 const app = express();
 const port = 3001;
+const API_KEY = "";
 
 // Middleware
 app.use(fileUpload());
 app.use(express.json());
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // Update with your React app's origin
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -29,7 +30,7 @@ const processCSV = (file) => {
 };
 
 const fetchMCNumber = async (dotNumber) => {
-  const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}/docket-numbers?webKey=b5a7fe0deca9d4a739b339f4a2ace1e1eca2173a`;
+  const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}/docket-numbers?webKey=${API_KEY}`;
   try {
     const response = await axios.get(apiUrl);
     const docketNumber = response.data.content[0]?.docketNumber;
@@ -41,7 +42,7 @@ const fetchMCNumber = async (dotNumber) => {
 };
 
 const fetchCarrierOperation = async (dotNumber) => {
-  const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}/operation-classification?webKey=b5a7fe0deca9d4a739b339f4a2ace1e1eca2173a`;
+  const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}/operation-classification?webKey=${API_KEY}`;
   try {
     const response = await axios.get(apiUrl);
     const operationClassDesc = response.data.content[0]?.operationClassDesc;
@@ -52,7 +53,7 @@ const fetchCarrierOperation = async (dotNumber) => {
 };
 
 const fetchCargoCarried = async (dotNumber) => {
-  const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}/cargo-carried?webKey=b5a7fe0deca9d4a739b339f4a2ace1e1eca2173a`;
+  const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}/cargo-carried?webKey=${API_KEY}`;
   try {
     const response = await axios.get(apiUrl);
     const cargoClassDesc = response.data.content[0]?.cargoClassDesc;
@@ -77,7 +78,7 @@ const scrapePhoneNumber = async (dotNumber) => {
 };
 
 const fetchCarrierDetails = async (dotNumber) => {
-  const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}?webKey=b5a7fe0deca9d4a739b339f4a2ace1e1eca2173a`;
+  const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}?webKey=${API_KEY}`;
   try {
     const response = await axios.get(apiUrl);
     const carrier = response.data.content.carrier;
