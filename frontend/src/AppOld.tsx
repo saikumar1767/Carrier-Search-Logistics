@@ -145,7 +145,7 @@ const App: React.FC = () => {
   const fetchCarrierDetails = async (
     dotNumber: string
   ): Promise<CarrierData | null> => {
-    const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}?webKey=${API_KEY}`; // Example API URL
+    const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}?webKey=${API_KEY}`;
 
     try {
       const response = await axios.get(apiUrl);
