@@ -17,7 +17,7 @@ const App: React.FC = () => {
   const [carrierData, setCarrierData] = useState<CarrierData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-
+  const API_KEY = "";
   const processCSV = (file: File): Promise<string[]> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -67,7 +67,7 @@ const App: React.FC = () => {
   const fetchMCNumber = async (
     dotNumber: string
   ): Promise<string | undefined> => {
-    const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}/docket-numbers?webKey=b5a7fe0deca9d4a739b339f4a2ace1e1eca2173a`;
+    const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}/docket-numbers?webKey=${API_KEY}`;
 
     try {
       const response = await axios.get(apiUrl);
@@ -87,7 +87,7 @@ const App: React.FC = () => {
   const fetchCarrierOperation = async (
     dotNumber: string
   ): Promise<string | undefined> => {
-    const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}/operation-classification?webKey=b5a7fe0deca9d4a739b339f4a2ace1e1eca2173a`;
+    const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}/operation-classification?webKey=${API_KEY}`;
 
     try {
       const response = await axios.get(apiUrl);
@@ -106,7 +106,7 @@ const App: React.FC = () => {
   const fetchCargoCarried = async (
     dotNumber: string
   ): Promise<string | undefined> => {
-    const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}/cargo-carried?webKey=b5a7fe0deca9d4a739b339f4a2ace1e1eca2173a`;
+    const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}/cargo-carried?webKey=${API_KEY}`;
 
     try {
       const response = await axios.get(apiUrl);
@@ -145,7 +145,7 @@ const App: React.FC = () => {
   const fetchCarrierDetails = async (
     dotNumber: string
   ): Promise<CarrierData | null> => {
-    const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}?webKey=b5a7fe0deca9d4a739b339f4a2ace1e1eca2173a`; // Example API URL
+    const apiUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/${dotNumber}?webKey=${API_KEY}`; // Example API URL
 
     try {
       const response = await axios.get(apiUrl);
